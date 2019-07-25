@@ -1,0 +1,24 @@
+{
+  "name": "programming_fundamentals_003",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "eslint": "eslint ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techreturners/programming_fundamentals_003.git"
+  },
+  "author": "Tech Returners",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/techreturners/programming_fundamentals_003/issues"
+  },
+  "homepage": "https://github.com/techreturners/programming_fundamentals_003#readme",
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "jest": "^24.5.0"
+  }
+}
