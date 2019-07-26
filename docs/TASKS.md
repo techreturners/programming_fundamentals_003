@@ -159,7 +159,7 @@ Your tests should all still pass at this point.
 
 1. If a book is an object, what is its encapsulated data?
 
-2. Why do we create a new Book for every single test in `Books.test.js`?
+2. Why do we create a new Book for every single test in `Book.test.js`?
 
 3. What data, of a book's encapsulated data, is changeable?
 
