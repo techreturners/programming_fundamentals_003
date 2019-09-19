@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/techreturners/programming_fundamentals_003#readme",
   "devDependencies": {
-    "eslint": "^5.15.3",
+    "eslint": "^6.4.0",
     "jest": "^24.5.0"
   }
 }
