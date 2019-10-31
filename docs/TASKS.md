@@ -52,115 +52,142 @@ const catalogue = [
 
 Update **every** book in the array and save the file.
 
-## 3) Implement the catalogue functions
+## 3) Run the tests for the `countBooksByAuthor` function
 
-Time to implement the 5 catalogue functions. You have already implemented these earlier in the week, in [programming_fundamentals_002](https://github.com/techreturners/programming_fundamentals_002), but now you need to make sure all the functions work with an _array of objects_ instead of an array of strings.
+The tests for `countBooksByAuthor` are already written.
 
-Tests are already written for the `checkBook` function but you will need to write your own tests for the other functions.
+Run `npm test` in the terminal to run them. See that they fail.
 
-This is likely to take you some time.
-
-Feel free to refer to your previous work for help, and to the [Tasks for programming_fundamentals_002](https://github.com/techreturners/programming_fundamentals_002/blob/master/docs/TASKS.md) if you need a reminder of how the Catalogue Service functions should behave.
-
-## 4) A Book Class
-
-Currently you have created individual book objects withou the use of a class:
+In these tests, we have written **three expectations** in the same test, as 3 examples of the same behaviour. All 3 expectations must pass for the test to pass:
 
 ```javascript
-const catalogue = [
-  {title: "The Catcher in the Rye", author: "J.D. Salinger", quantity: 10},
-  {title: "Dracula", author: "Bram Stoker", quantity: 0},
-  {title: "Between the Assassinations", author: "Aravind Adiga", quantity: 9},
-  ...
-];
-```
-
-However, we might want to create a Class of `Book` to make it easier to create new books that follow a common blueprint, and to encapsulate common behaviour.
-
-Open the file `Book.js` in the `/app` directory and take a look at the class defined in there.
-
-Now open `test/Book.test.js` and look at the tests which have been written for the book class.
-
-The first test should be passing, but all the other tests are disabled, with a little `x` at the beginning of the `describe` block:
-
-```javascript
-xdescribe("addStock()", () => {
-  // tests here
-});
-
-```
-
-Remove the `x` from the beginning of the `addStock()` tests and run `npm test` in the terminal to run the next set of tests too.
-
-```javascript
-describe("addStock()", () => {
-  // tests here
+describe("catalogueService.countBooksByAuthor", () => {
+  test("returns the total number of books written by the given author", () => {
+    expect(catalogueService.countBooksByAuthor("Hilary Mantel")).toBe(5);
+    expect(catalogueService.countBooksByAuthor("Celeste Ng")).toBe(2);
+    expect(catalogueService.countBooksByAuthor("Charles Dickens")).toBe(3);
+  });
 });
 ```
 
-You should see the following error:
+## 4) Implement the `countBooksByAuthor` function
 
-```
-TypeError: book.addStock is not a function
-```
+This function should return the total number of books in the catalogue written by the given author.
 
-## 5) Create an addStock method for a book
+For example, there are 5 books by Hilary Mantel and 1 by Celeste Ng.
 
-Create an `addStock` method inside the `Book` class.
+Go to the `app/catalogue_service.js` file and implement the function so that the tests pass.
 
-This method should take an argument of a number, and increase the number of books in stock by this number.
+## 5) Write a test for the `checkBookByTitle` function
 
-Run the tests again to ensure that they all pass.
+This function receives a title as an argument and should return `true` if a book with this title exists in the array, and `false` otherwise.
 
-## 6) Un-x the next test
-
-Now un-x the next test which tests the `removeStock()` method.
-
-Run the tests and see that they fail.
-
-## 7) Create a removeStock method for a book
-
-Create a `removeStock` method inside the `Book` class.
-
-This method should take an argument of a number, and decrease the number of books in stock by this number.
-
-Note that the number of books in stock cannot fall below 0.
-
-Run the tests again to ensure that they all pass.
-
-## 8) An array of Book Objects
-
-Now we should be able to use our `Book` class to create the book objects that are populating our `catalogue` array.
-
-First, we need to **require** the Book class into the file where we're going to use it.
-
-Add this line to the top of the `catalogue_service.js` file:
+E.g.
 
 ```javascript
-const Book = require("./Book");
+checkBookByTitle("The Origin of Species"); // true
+checkBookByTitle("The Chronicles of Narnia"); // false
 ```
 
-Then, update each of the objects in the `catalogue` array to be new Book instances:
+Your test suite now may look as follows:
 
 ```javascript
-const catalogue = [
-  new Book("The Catcher in the Rye", "J.D. Salinger", 10),
-  new Book("Dracula", "Bram Stoker", 0),
-  new Book("Between the Assassinations", "Aravind Adiga", 9),
-  ...
+describe("catalogueService", () => {
+  describe("catalogueService.countBooksByAuthor", () => {
+    test("returns the total number of books written by the given author", () => {
+      expect(catalogueService.countBooksByAuthor("Hilary Mantel")).toBe(5);
+      expect(catalogueService.countBooksByAuthor("Celeste Ng")).toBe(2);
+      expect(catalogueService.countBooksByAuthor("Charles Dickens")).toBe(3);
+    });
+  });
+
+  describe("catalogueService.checkBookByTitle", () => {
+    test("returns true if the book exists", () => {
+      expect(
+        catalogueService.checkBookByTitle(
+          "The Assassination of Margaret Thatcher"
+        )
+      ).toBe(5);
+    });
+  });
+});
+```
+
+## 6) Implement the `checkBookByTitle` function
+
+Go to the `app/catalogue_service.js` file and implement the function so that the tests you have just written pass.
+
+## 7) The other case
+
+Write another test that ensures the function `checkBookByTitle` returns false when the book does not exists.
+
+Run this test and see whether it passes or fails.
+
+If it fails, you'll need to update your function to ensure it returns `false` if the book is not found.
+
+## 8) The `countBooksByFirstLetter` function
+
+This function should receive a letter as an argument (e.g. "H") and return the total number of books that begin with this letter. Note that the quantity is not relevant here. For example:
+
+```javascript
+countBooksByFirstLetter("W"); // returns 2
+```
+
+This returns 2 because Wolf Hall and Why Be Happy When You Could Be Normal? both begin with W.
+
+Begin by writing a test, as always, before implementing the function.
+
+## 9) A lowercase letter
+
+What if the `countBooksByFirstLetter` function is given a lowercase letter, e.g. `countBooksByFirstLetter("h")`?
+
+It should still count the books beginning with H, ignoring the case of the letter.
+
+Write a test for this functionality, and if the test doesn't pass, update you function so that it passes.
+
+## 10) The `getQuantity` function
+
+This function should receive a title as an argument (e.g. "The Origin of Species") and return the quantity of this item which is in stock. For example:
+
+```javascript
+getQuantity("A Place of Greater Safety"); // returns 11
+```
+
+Begin by writing a test, as always, before implementing the function.
+
+## 11) The `getBooksByAuthor` function
+
+This function should receive an author as an argument (e.g. "Robert Bolaño") and return an array of books. For example:
+
+```javascript
+getBooksByAuthor("Robert Bolaño");
+
+// Returns:
+[
+  { title: "2666", author: "Robert Bolaño", quantity: 12 },
+  { title: "By Night In Chile", author: "Robert Bolaño", quantity: 8 }
 ];
 ```
 
-Update **all** of your book objects so they look like the above.
+Begin by writing a test, as always, before implementing the function.
 
-Your tests should all still pass at this point.
+Remember that when testing an array return value you should use `toEqual` and not `toBe` (see yesterday's work for a reminder)
+
+## 12) The `checkQuantity` function
+
+This function should receive a title and a quantity as an argument (e.g. "By Night In Chile" and 4) and return `true` if there are at least as many books in stock as the given quantity, and false otherwise. For example:
+
+```javascript
+checkQuantity("By Night In Chile", 4); // true
+checkQuantity("By Night In Chile", 100); // false
+```
+
+Begin by writing a test, as always, before implementing the function.
 
 ## Written Questions
 
 1. If a book is an object, what is its encapsulated data?
 
-2. Why do we create a new Book for every single test in `Book.test.js`?
+2. What data, of a book's encapsulated data, might be changeable?
 
-3. What data, of a book's encapsulated data, is changeable?
-
-4. Why is representing a book as an object a better idea than representing it as a string?
+3. Why is representing a book as an object a better idea than representing it as a string?

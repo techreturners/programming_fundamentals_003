@@ -19,38 +19,38 @@ const catalogue = [
   "Great Expectations by Charles Dickens (1)",
   "The Blind Assassin by Margaret Atwood (8)",
   "Why Be Happy When You Could Be Normal? by Jeanette Winterson (19)",
-  "The Origin of Species by Charles Darwin (50)",
+  "The Origin of Species by Charles Darwin (50)"
 ];
 
-function checkBook(title) {
-  if (!title) throw new Error("Please provide a title");
+function countBooksByAuthor(author) {
   // Your code here
 }
 
-function countBooksByKeyword(keyword) {
-  if (!keyword) throw new Error("Please provide a keyword");
+function checkBookByTitle(title) {
+  // Your code here
+}
+
+function countBooksByFirstLetter(letter) {
+  // Your code here
+}
+
+function getQuantity(title) {
   // Your code here
 }
 
 function getBooksByAuthor(author) {
-  if (!author) throw new Error("Please provide an author");
   // Your code here
 }
 
-function getStockCount(title) {
-  if (!title) throw new Error("Please provide a title");
-  // Your code here
-}
-
-function stockReview(title) {
-  if (!title) throw new Error("Please provide a title");
+function checkQuantity(title, quantity) {
   // Your code here
 }
 
 module.exports = {
-  checkBook,
-  countBooksByKeyword,
+  countBooksByAuthor,
+  checkBookByTitle,
+  countBooksByFirstLetter,
+  getQuantity,
   getBooksByAuthor,
-  getStockCount,
-  stockReview
+  checkQuantity
 };
