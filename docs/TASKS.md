@@ -35,9 +35,7 @@ Discuss with your pair.
 
 ## 2) Update each book to be an object.
 
-For now, don't worry about Classes.
-
-At the moment, update each string that represents a book to be an object.
+Update each string that represents a book to be an object.
 
 So your array might end up looking like this:
 
@@ -64,7 +62,7 @@ In these tests, we have written **three expectations** in the same test, as 3 ex
 describe("catalogueService.countBooksByAuthor", () => {
   test("returns the total number of books written by the given author", () => {
     expect(catalogueService.countBooksByAuthor("Hilary Mantel")).toBe(5);
-    expect(catalogueService.countBooksByAuthor("Celeste Ng")).toBe(2);
+    expect(catalogueService.countBooksByAuthor("Celeste Ng")).toBe(1);
     expect(catalogueService.countBooksByAuthor("Charles Dickens")).toBe(3);
   });
 });
@@ -107,7 +105,7 @@ describe("catalogueService", () => {
         catalogueService.checkBookByTitle(
           "The Assassination of Margaret Thatcher"
         )
-      ).toBe(5);
+      ).toBe(true);
     });
   });
 });
@@ -164,7 +162,7 @@ getBooksByAuthor("Robert Bolaño");
 
 // Returns:
 [
-  { title: "2666", author: "Robert Bolaño", quantity: 12 },
+  { title: "2666", author: "Robert Bolaño", quantity: 17 },
   { title: "By Night In Chile", author: "Robert Bolaño", quantity: 8 }
 ];
 ```
